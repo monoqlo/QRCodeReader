@@ -29,16 +29,19 @@ class BinaryModeViewController: UIViewController {
 
     private func showBinary() {
         let bitsStrings: [String] = binary.bytes.map { (_) -> String in
-            let bit0 = String(binary.next(bits: 1))
-            let bit1 = String(binary.next(bits: 1))
-            let bit2 = String(binary.next(bits: 1))
-            let bit3 = String(binary.next(bits: 1))
-            return bit0 + bit1 + bit2 + bit3
+            var string = ""
+            for _ in 0...7 {
+                string += String(binary.next(bits: 1))
+            }
+            return string
         }
 
-        textView.text = bitsStrings.reduce(into: "", { (result, bits) in
-            result = result + bits + " "
-        })
+        textView.text = bitsStrings.reduce("") {
+            guard var result = $0 else { return "" }
+            let bitsPair = String($1.prefix(4) + " " + $1.suffix(4))
+            result += (result.isEmpty) ? bitsPair : " " + bitsPair
+            return result
+        }
     }
 
     private func decode(_ binary: inout Binary) {
