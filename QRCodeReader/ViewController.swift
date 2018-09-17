@@ -150,13 +150,13 @@ class ViewController: UIViewController {
         try? handler.perform([request])
 
         guard let results = request.results as? [VNBarcodeObservation],
-            let result = results.first(where: { $0.payloadStringValue != nil }),
+            let result = results.first,
             let descriptor = result.barcodeDescriptor as? CIQRCodeDescriptor
             else { return }
 
         // VNBarcodeObservation#payloadStringValue の値は
         // AVMetadataMachineReadableCodeObject#stringValue とたぶん同じ
-        stringValueLabel.text = result.payloadStringValue
+        stringValueLabel.text = result.payloadStringValue ?? "No payloadStringValue."
         qrCodeImageView.image = generateQRCodeImage(from: descriptor)
 
         symbolVersion = descriptor.symbolVersion
