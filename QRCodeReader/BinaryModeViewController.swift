@@ -119,7 +119,7 @@ enum Mode: Int {
     case structuredAppend     = 3 // 0011 構造的連接
     case eci                  = 7 // 0111 ECI
     case fnc1InFirstPosition  = 5 // 0101 FNC1（1番目の位置）
-    case fnc1InSecondPosition = 9 // 1001 FNC1（1番目の位置）
+    case fnc1InSecondPosition = 9 // 1001 FNC1（2番目の位置）
     case endOfMessage         = 0 // 0000 終端パターン
 
     var description: String {
